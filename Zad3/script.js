@@ -1,51 +1,55 @@
-let niz1 = [2, 5, 1, 15];
-let broj1 = 11;
+let array1 = [2, 5, 1, 15];
+let number1 = 11;
 
-let niz2 = [2, 5, 1, 4, 6];
-let broj2 = 5;
+let array2 = [2, 5, 1, 4, 6];
+let number2 = 5;
 
-let niz3 = [2, 4, 5];
-let broj3 = 3;
+let array3 = [2, 4, 5];
+let number3 = 3;
 
-function srediNiz(niz, broj) {
-    const noviNiz = [];
+//sortiraj niz i izbaci vrijednosti vece od B
+function srediNiz(array, number) {
+    const newArray = [];
 
-    niz = niz.sort( (a, b) => {return b - a} );
+    array = array.sort( (a, b) => {return b - a} );
 
-    niz.forEach(brojIzListe => {
-        if (brojIzListe <= broj)
-            noviNiz.push(brojIzListe);
+    array.forEach(num => {
+        if (num <= number)
+            newArray.push(num);
     })
 
-    return noviNiz;
+    return newArray;
 }
 
-function check(niz, broj, result) {
-    const noviNiz = srediNiz(niz, broj);
+function check(array, number, result) {
+    const newArray = srediNiz(array, number);
 
-    let brojBrojeva = 0;
-    let zbroj = 0;
+    let numbers = 0;
+    let sum = 0;
 
-    noviNiz.forEach((brojIzListe, index) => {
-        while(zbroj < broj) {
-            zbroj = zbroj + brojIzListe;
-            brojBrojeva++;
+    newArray.forEach((numArray, index) => {
+        //dodaji dok suma nije veca od B
+        while(sum < number) {
+            sum = sum + numArray;
+            numbers++;
         }
 
-        if (zbroj !== broj) {
-            zbroj = zbroj - brojIzListe;
-            
-            brojBrojeva--;
+        //ako je suma veca izbaci zadnji dodani broj
+        if (sum !== number) {
+            sum = sum - numArray;
 
-            if (index === noviNiz.length - 1) {
-                brojBrojeva = -1;
+            numbers--;
+
+            //ako nema vise preostalih brojeva iz liste vracamo -1
+            if (index === newArray.length - 1) {
+                numbers = -1;
             }
         }
     })
     
-    document.getElementById(`${result}`).textContent = brojBrojeva;
+    document.getElementById(`${result}`).textContent = numbers;
 }
 
-check(niz1, broj1, 'result1');
-check(niz2, broj2, 'result2');
-check(niz3, broj3, 'result3');
+check(array1, number1, 'result1');
+check(array2, number2, 'result2');
+check(array3, number3, 'result3');
